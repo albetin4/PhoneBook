@@ -62,4 +62,11 @@ public class HelperUser extends HelperBase{
         String text = alert.getText();
         return text.contains("Wrong email or password format");
     }
+
+    public void login(User user) {
+        openLoginRegistrationForm();
+        fillLoginRegistrationForm(user);
+        submitLogin();
+        pause(1000);
+    }
 }

@@ -1,8 +1,12 @@
 package manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.io.IOException;
 
 public class HelperBase {
 
@@ -34,6 +38,25 @@ public class HelperBase {
         } catch (InterruptedException e){
             e.printStackTrace();
         }
+    }
+
+    public void takeScreenShot(String link){
+        File tmp = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
+        File screenshot = new File(link);
+
+        try {
+            Files.copy(tmp,screenshot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean shouldHave(By locator, String text, int time){
+        text = text.trim();
+        return new WebDriverWait(wd, time)
+                .until(ExpectedConditions.textToBePresentInElement(
+                        wd.findElement(locator), text
+                ));
     }
 
 }

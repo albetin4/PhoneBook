@@ -29,7 +29,8 @@ public class RegistrationTest extends TestBase{
         int i = (int) ((System.currentTimeMillis()/1000)%3600);
         String email = "name" + i + "@mail.com";
         String password = "$Name12345";
-        System.out.println("Email: " + email);
+        // System.out.println("Email: " + email);
+        logger.info("registrationPositiveTest starts with: " + email + " & " + password);
 
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(email, password);
